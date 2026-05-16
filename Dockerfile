@@ -1,7 +1,8 @@
 FROM php:8.2-apache
 
-COPY . /var/www/html/
+RUN apt-get update && apt-get install -y libpq-dev \
+    && docker-php-ext-install pdo pdo_pgsql
 
-RUN chmod -R 777 /var/www/html
+COPY . /var/www/html/
 
 EXPOSE 80
